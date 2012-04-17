@@ -1,137 +1,70 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-
-
 public class Menu extends JFrame{
+  public Menu()
+  {
+    super("Funky Menu");
 
-	public Menu()
-	{
-		super("Menu");
-		//JMenuBar mb = new JMenuBar();
-		//setJMenuBar(mb);
-		
-		JMenu state1 = new JMenu("State1");
-		state1.setMnemonic('A');
-		JMenuItem item1 = new JMenuItem("Industries");
-		item1.setMnemonic('B');
-		JMenuItem item2 = new JMenuItem("Hill Stations");
-		JMenuItem item3 = new JMenuItem("Top Institutions");
-		
-		state1.add(item1);
-		state1.add(item2);
-		state1.add(item3);
-		
-		JMenu state2 = new JMenu("State2");
-		state2.setMnemonic('C');
-		JMenuItem item4 = new JMenuItem("Industries");
-		item1.setMnemonic('D');
-		JMenuItem item5 = new JMenuItem("Hill Stations");
-		JMenuItem item6 = new JMenuItem("Top Institutions");
-		state2.add(item4);
-		state2.add(item5);
-		state2.add(item6);
-		
-		JMenu state3 = new JMenu("State3");
-		state3.setMnemonic('E');
-		JMenuItem item7 = new JMenuItem("Industries");
-		item1.setMnemonic('F');
-		JMenuItem item8 = new JMenuItem("Hill Stations");
-		JMenuItem item9 = new JMenuItem("Top Institutions");
-		state3.add(item7);
-		state3.add(item8);
-		state3.add(item9);
-		
+    JMenu [] states = new JMenu [3];
+    JMenuItem [] items = new JMenuItem [3];
+    //Initializing the items
+    items[0] = new JMenuItem("Industries");
+    items[0].setMnemonic('I');
+    items[1] = new JMenuItem("Hill Stations");
+    items[1].setMnemonic('H');
+    items[2] = new JMenuItem("Top Institutions");
+    items[2].setMnemonic('T');
 
-		
-			//adding action listener to menu items
-		item1.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Industry : located in ...");
-				}
-			}
-		);
-		item2.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Hill Station: located in...");
-				}
-			}
-		);
-		item3.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Top Institutes: located in...");
-				}
-			}
-		);	
-		item4.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Industry : located in ...");
-				}
-			}
-		);
-		item5.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Hill Station: located in...");
-				}
-			}
-		);
-		item6.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Top Institutes: located in...");
-				}
-			}
-		);						
-		item7.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Industry : located in ...");
-				}
-			}
-		);
-		item8.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Hill Station: located in...");
-				}
-			}
-		);
-		item9.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("Top Institutes: located in...");
-				}
-			}
-		);						
+    //Initializing the states
+    //I've set the adjacent keys as the Mnemonics for easy user interaction
+    //though it is less intuitive, it can vary on the user preference.
+    states[0] =  new JMenu("Tamil Nadu"); states[0].setMnemonic('Q');
+    states[1] = new JMenu("West Bengal"); states[1].setMnemonic('W');
+    states[2] = new JMenu("Haryana"); states[2].setMnemonic('E');
 
-		JMenuBar bar = new JMenuBar();
-		setJMenuBar(bar);
-		bar.add(state1);
-		bar.add(state2);
-		bar.add(state3);
-		
-		getContentPane();
-		setSize(500, 500);
-		setVisible(true);
-	}
-	
-	public static void main(String[] args)
-	{
-		Menu app = new Menu();
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+    //Adding all the items to each of the states
+    for(int i=0; i<3; ++i)
+    {
+      for(int j=0; j<3; ++j)
+      {
+        states[i].add(items[j]);
+      }
+    }
+
+    //adding action listener to menu items
+    for(int j=0; j<3; ++j)
+    {
+      items[j].addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent evt)
+      {
+        //The next few lines could be clubbed together in one but for
+        //clarity sake I write them seperately
+        JMenuItem currentItem = (JMenuItem) evt.getSource();
+        String textToDisplay = currentItem.getText();
+        System.out.println(textToDisplay + " : located in ...");
+        //one liner : System.out.println(((JMenuItem) evt.getSource()).getText() + " : located in ...");
+      }
+      });
+    }
+    //finally to fix up the MenuBar
+    JMenuBar bar = new JMenuBar();
+    setJMenuBar(bar);
+    for(int i=0; i<3; ++i)
+    {
+      bar.add(states[i]);
+    }
+
+    getContentPane();
+    //TODO Create a JLabel add it to the contents
+    //Instead of writing to the console, update the frames text
+    setSize(500, 500);
+    setVisible(true);
+  }
+
+  public static void main(String[] args)
+  {
+    Menu app = new Menu();
+    app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
 }
