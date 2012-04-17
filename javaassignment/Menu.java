@@ -21,13 +21,18 @@ public class Menu extends JFrame{
     return newItem;
   }
 
+  private JLabel stateTrivia;
+  private JMenu [] states;
+  private JMenuItem [] items;
+  private List<JMenuItem> allItems;
+
   public Menu()
   {
     super("Funky Menu");
 
-    JMenu [] states = new JMenu [3];
-    JMenuItem [] items = new JMenuItem [3];
-    List<JMenuItem> allItems = new ArrayList<JMenuItem>();
+    states = new JMenu [3];
+    items = new JMenuItem [3];
+    allItems = new ArrayList<JMenuItem>();
     //Initializing the items
     items[0] = new JMenuItem("Industries");
     items[0].setMnemonic('I');
@@ -60,14 +65,13 @@ public class Menu extends JFrame{
       allItems.get(j).addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent evt)
       {
-        //The next few lines could be clubbed together in one but for
-        //clarity sake I write them seperately
+        //Slightly tricky code, had to look at stackoverflow to figure this out
         JMenuItem currentItem = (JMenuItem) evt.getSource();
         JPopupMenu parentOfItem = (JPopupMenu) currentItem.getParent();
         JMenu invoker = (JMenu)parentOfItem.getInvoker();
-        String textToDisplay = invoker.getText() + "," + currentItem.getText();
+        final String textToDisplay = invoker.getText() + "," + currentItem.getText();
         System.out.println(stateDetails.get(textToDisplay));
-        //one liner : System.out.println(((JMenuItem) evt.getSource()).getText() + " : located in ...");
+        stateTrivia.setText(stateDetails.get(textToDisplay));
       }
       });
     }
@@ -80,8 +84,10 @@ public class Menu extends JFrame{
     }
 
     getContentPane();
-    //TODO Create a JLabel add it to the contents
-    //Instead of writing to the console, update the frames text
+    //Update contents on the screen using a label
+    stateTrivia = new JLabel("Choose any Menu Item to know about the details of the state",JLabel.CENTER);
+    stateTrivia.setSize(400,400);
+    add(stateTrivia);
     setSize(500, 500);
     setVisible(true);
   }
