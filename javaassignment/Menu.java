@@ -3,6 +3,15 @@ import java.awt.event.*;
 import java.util.*;
 
 public class Menu extends JFrame{
+  private static Map<String,String> stateDetails;
+  //to initialize the map
+  public static void initializeStateDetails()
+  {
+    stateDetails = new HashMap<String,String>();
+    stateDetails.put("Tamil Nadu,Industries", "Salem is the most famous industrial town in TN");
+    stateDetails.put("Tamil Nadu,Hill Stations", "Kodaikanal and Ooty are the hill stations to visit here");
+    //add more state details here similarly
+  }
 
   public JMenuItem cloneMenuItem(JMenuItem item)
   {
@@ -54,8 +63,10 @@ public class Menu extends JFrame{
         //The next few lines could be clubbed together in one but for
         //clarity sake I write them seperately
         JMenuItem currentItem = (JMenuItem) evt.getSource();
-        String textToDisplay = currentItem.getText();
-        System.out.println(textToDisplay + " : located in ...");
+        JPopupMenu parentOfItem = (JPopupMenu) currentItem.getParent();
+        JMenu invoker = (JMenu)parentOfItem.getInvoker();
+        String textToDisplay = invoker.getText() + "," + currentItem.getText();
+        System.out.println(stateDetails.get(textToDisplay));
         //one liner : System.out.println(((JMenuItem) evt.getSource()).getText() + " : located in ...");
       }
       });
@@ -75,8 +86,9 @@ public class Menu extends JFrame{
     setVisible(true);
   }
 
-  public static void main(String[] args)
+  public static void main(String [] args)
   {
+    initializeStateDetails();
     Menu app = new Menu();
     app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
