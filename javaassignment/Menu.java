@@ -10,6 +10,14 @@ public class Menu extends JFrame{
     stateDetails = new HashMap<String,String>();
     stateDetails.put("Tamil Nadu,Industries", "Salem is the most famous industrial town in TN");
     stateDetails.put("Tamil Nadu,Hill Stations", "Kodaikanal and Ooty are the hill stations to visit here");
+	stateDetails.put("Tamil Nadu,Top Institutions","Two major ones are NITT and IIT");
+	stateDetails.put("West Bengal,Industries","Durgapur is a major industrial town");
+	stateDetails.put("West Bengal,Hill Stations","Darjeeling ,a famous hill station is situated here");
+	stateDetails.put("West Bengal,Top Institutions", "IIT Kharagpur,Presidency College are few of the major ones");
+	stateDetails.put("Haryana,Industries", "Gurgaon a growing hub for industries is part of this state");
+	stateDetails.put("Haryana,Hill Stations", "Morni Hills, the only hill station of Haryana");
+	stateDetails.put("Haryana,Top Institutions","NIT Kurukshetra, a very famous institute");
+	
     //add more state details here similarly
   }
 
