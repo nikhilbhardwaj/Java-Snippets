@@ -1,13 +1,24 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class Menu extends JFrame{
+
+  public JMenuItem cloneMenuItem(JMenuItem item)
+  {
+    //Hackish method to behave like Object.clone()
+    JMenuItem newItem = new JMenuItem(item.getText());
+    newItem.setMnemonic(item.getMnemonic());
+    return newItem;
+  }
+
   public Menu()
   {
     super("Funky Menu");
 
     JMenu [] states = new JMenu [3];
     JMenuItem [] items = new JMenuItem [3];
+    List<JMenuItem> allItems = new ArrayList<JMenuItem>();
     //Initializing the items
     items[0] = new JMenuItem("Industries");
     items[0].setMnemonic('I');
@@ -28,14 +39,16 @@ public class Menu extends JFrame{
     {
       for(int j=0; j<3; ++j)
       {
-        states[i].add(items[j]);
+        JMenuItem tmp = cloneMenuItem(items[j]);
+        allItems.add(tmp);
+        states[i].add(tmp);
       }
     }
 
     //adding action listener to menu items
-    for(int j=0; j<3; ++j)
+    for(int j=0; j<allItems.size(); ++j)
     {
-      items[j].addActionListener(new ActionListener(){
+      allItems.get(j).addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent evt)
       {
         //The next few lines could be clubbed together in one but for
