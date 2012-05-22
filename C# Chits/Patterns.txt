@@ -1,3 +1,0 @@
-http://www.interviewmantra.net/2009/04/print-number-pattern-c-programs.html
-http://sites.google.com/site/pursuit2excel/basic-c-programs/program-to-print-various-types-of-stars-patterns
-http://www.programmingsimplified.com/c-program-print-stars-pyramid

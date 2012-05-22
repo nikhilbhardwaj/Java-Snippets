@@ -3,8 +3,9 @@ import java.io.*;
 
 public class SmsSender
 {
-  static final String _userName = "7418259475";
-  static final String _password = "nik2489";
+  //Replace your way2sms username and password below
+  static final String _userName = "your way2sms username";
+  static final String _password = "your way2sms password";
   static final String _url = "http://ubaid.tk/sms/sms.aspx";
   static final String charset = "UTF-8";
 
@@ -43,7 +44,7 @@ public class SmsSender
   public static void main(String [] args)
     throws Exception
   {
-    String testPhoneNo = "8148513619";
+    String testPhoneNo = "9876543210";
     String testMessage = "Sending Messages From java is not too hard";
 
     sendMessage(testPhoneNo,testMessage);
